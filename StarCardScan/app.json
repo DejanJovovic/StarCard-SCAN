@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/favicon1.png"
+        "foregroundImage": "./assets/icons/favicon.png"
       },
       "permissions": [
         "android.permission.CAMERA",
@@ -21,7 +21,7 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.RECORD_AUDIO"
       ],
-      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.deki123.StarCardScan"
     },
     "web": {
       "bundler": "metro",
@@ -41,6 +41,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d7f5cbc7-9ccf-40d2-acd3-e32a7741b300"
+      }
     }
   }
 }
