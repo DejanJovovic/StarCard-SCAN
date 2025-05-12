@@ -9,7 +9,12 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.deks123.StarCardApp",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan QR codes."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,6 +26,7 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.RECORD_AUDIO"
       ],
+      "softwareKeyboardLayoutMode": "pan",
       "package": "com.deki123.StarCardScan"
     },
     "web": {

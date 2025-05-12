@@ -1,54 +1,90 @@
 import {Tabs} from "expo-router";
-import {ImageBackground, Image, Text, View} from "react-native";
-
 import icons from "@/constants/icons";
-import colors from "@/constants/colors";
+import {View, Image, Text, Animated, TouchableWithoutFeedback, TouchableOpacity, Pressable} from "react-native";
+import React, {useEffect, useRef} from "react";
 
 function TabIcon({ focused, icon, title, isCenter = false }: any) {
-    if (isCenter) {
-        return (
-            <View
-                className="justify-center items-center"
-                style={{
-                    marginTop: -30, // Pull it above the tab bar
-                    width: 70,
-                    height: 70,
-                    borderRadius: 35,
-                    backgroundColor: 'white',
-                    elevation: 5,
-                    shadowColor: '#000',
-                    shadowOpacity: 0.15,
-                    shadowRadius: 6,
-                    shadowOffset: { width: 0, height: 3 },
-                }}
-            >
-                <Image source={icon} tintColor={focused ? colors.primary : colors.secondary} className="size-6" />
-            </View>
-        );
-    }
+    const scaleAnim = useRef(new Animated.Value(1)).current;
 
-    if (focused) {
-        return (
-            <ImageBackground
-                className="flex flex-column justify-center items-center mt-5 overflow-hidden rounded-2xl"
-                style={{
-                    width: 90,
-                    height: 56,
-                    backgroundColor: '#E8E8EAF2',
-                }}
-            >
-                <Image source={icon} tintColor="black" className="size-6" />
-                <Text className="font-semibold text-xs" style={{ color: colors.primary }}>
-                    {title}
-                </Text>
-            </ImageBackground>
-        );
-    }
+    useEffect(() => {
+        Animated.spring(scaleAnim, {
+            toValue: 1,
+            useNativeDriver: true,
+        }).start();
+    }, [focused]);
+
+    const size = isCenter ? 70 : 50;
+    const marginTop = isCenter ? -10 : 25;
+
+    const circleColor = isCenter
+        ? focused
+            ? "#000000E5"
+            : "#82BCC7"
+        : focused
+            ? "#000000E5"
+            : "white";
+
+    const iconTintColor = isCenter
+        ? focused
+            ? "white"
+            : "white"
+        : focused
+            ? "white"
+            : "#000000E5";
+
+    const borderWidth = isCenter ? 0 : focused ? 0 : 1.5;
+    const borderColor = isCenter ? "transparent" : "#82BCC7";
+
+    const textColor = focused ? "#000000E5" : "#82BCC7";
 
     return (
-        <View className="size-full justify-center items-center mt-4 rounded-full">
-            <Image source={icon} tintColor={colors.secondary} className="size-5" />
-        </View>
+        <Animated.View
+            style={{
+                transform: [{ scale: scaleAnim }],
+                alignItems: "center",
+                marginTop,
+            }}
+        >
+            <View
+                style={{
+                    width: size,
+                    height: size,
+                    borderRadius: size / 2,
+                    backgroundColor: circleColor,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderWidth,
+                    borderColor,
+                }}
+            >
+                <Image
+                    source={icon}
+                    style={{
+                        tintColor: iconTintColor,
+                        width: 24,
+                        height: 24,
+                    }}
+                />
+            </View>
+
+            {!isCenter && (
+                <View style={{ width: size, alignItems: "center" }}>
+                    <Text
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                        style={{
+                            fontSize: 12,
+                            marginTop: 2,
+                            color: textColor,
+                            fontWeight: "600",
+                            textAlign: "center",
+                        }}
+                    >
+                        {title}
+                    </Text>
+                </View>
+            )}
+        </Animated.View>
     );
 }
 
@@ -65,73 +101,95 @@ export default function TabsLayout() {
                     backgroundColor: "white",
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20,
-                    width: "100%",
-                    height: 55,
+                    height: 90,
                     position: "absolute",
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    overflow: "visible",
                     borderTopWidth: 0,
                     elevation: 10,
-                    shadowColor: '#000', // For iOS shadow
+                    shadowColor: "#000",
                     shadowOffset: { width: 0, height: 2 },
                     shadowOpacity: 0.1,
                     shadowRadius: 4,
+                    paddingBottom: 42,
                 },
             }}
         >
             <Tabs.Screen
-                name="index"
+                name="home"
                 options={{
-                    title: "index",
+                    title: 'Home',
                     headerShown: false,
-                    tabBarIcon: ({focused}) => (
-                        <TabIcon focused={focused} icon={icons.home} title="Home"/>
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon focused={focused} icon={icons.home} title="Home" />
                     ),
+                    tabBarButton: ({ children, onPress }) => (
+                        <Pressable onPress={onPress} android_ripple={{ color: "transparent" }}>
+                            {children}
+                        </Pressable>
+                    )
                 }}
             />
-
             <Tabs.Screen
                 name="search"
                 options={{
-                    title: "Search",
+                    title: 'Search',
                     headerShown: false,
-                    tabBarIcon: ({focused}) => (
-                        <TabIcon focused={focused} icon={icons.search} title="Search"/>
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon focused={focused} icon={icons.search} title="Search" />
                     ),
+                    tabBarButton: ({ children, onPress }) => (
+                        <Pressable onPress={onPress} android_ripple={{ color: "transparent" }}>
+                            {children}
+                        </Pressable>
+                    )
                 }}
             />
-
             <Tabs.Screen
                 name="scan"
                 options={{
-                    title: "Scan",
+                    title: 'Scan',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <TabIcon focused={focused} icon={icons.scan} title="Scan" isCenter />
                     ),
-                }}
-            />
-            <Tabs.Screen
-                name="profile"
-                options={{
-                    title: "Profile",
-                    headerShown: false,
-                    tabBarIcon: ({focused}) => (
-                        <TabIcon focused={focused} icon={icons.person} title="Profile"/>
-                    ),
+                    tabBarButton: ({ children, onPress }) => (
+                        <Pressable onPress={onPress} android_ripple={{ color: "transparent" }}>
+                            {children}
+                        </Pressable>
+                    )
                 }}
             />
 
             <Tabs.Screen
+                name="profile"
+                options={{
+                    title: 'Profile',
+                    headerShown: false,
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon focused={focused} icon={icons.person} title="Profile" />
+                    ),
+                    tabBarButton: ({ children, onPress }) => (
+                        <Pressable onPress={onPress} android_ripple={{ color: "transparent" }}>
+                            {children}
+                        </Pressable>
+                    ),
+                }}
+            />
+            <Tabs.Screen
                 name="info"
                 options={{
-                    title: "Info",
+                    title: 'Info',
                     headerShown: false,
-                    tabBarIcon: ({focused}) => (
-                        <TabIcon focused={focused} icon={icons.info} title="Info"/>
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon focused={focused} icon={icons.info} title="Info" />
                     ),
+                    tabBarButton: ({ children, onPress }) => (
+                        <Pressable onPress={onPress} android_ripple={{ color: "transparent" }}>
+                            {children}
+                        </Pressable>
+                    )
                 }}
             />
         </Tabs>

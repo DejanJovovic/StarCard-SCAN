@@ -1,11 +1,14 @@
-import {View, TouchableOpacity, StyleSheet, Text, Image, Alert} from "react-native";
-import {useState, useCallback, useRef} from "react";
+import {View, TouchableOpacity, StyleSheet, Text, Image, Alert, StatusBar} from "react-native";
+import React, {useState, useCallback, useRef} from "react";
 import {Camera, CameraView} from "expo-camera";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useFocusEffect} from "expo-router";
 import * as Haptics from "expo-haptics";
 import colors from "@/constants/colors";
 import icons from "@/constants/icons";
+import CustomHeaderLoggedIn from "@/components/CustomHeaderLoggedIn";
+
 
 export function Scan() {
     const [hasPermission, setHasPermission] = useState(null);
@@ -23,6 +26,7 @@ export function Scan() {
 
     const checkPermissions = async () => {
         const {status} = await Camera.requestCameraPermissionsAsync();
+        // has an error for some reason, but it doesnt cause crashes
         setHasPermission(status === "granted");
     };
 
@@ -93,17 +97,6 @@ export function Scan() {
         }, 2000);
     };
 
-
-    if (!authToken) {
-        return (
-            <View className="flex-1 justify-center items-center bg-[#f0f0f0]">
-                <Text className="text-xl font-semibold text-center px-6">
-                    Please log in to scan QR codes
-                </Text>
-            </View>
-        );
-    }
-
     if (hasPermission === false) {
         return (
             <View className="flex-1 justify-center items-center">
@@ -113,51 +106,75 @@ export function Scan() {
     }
 
     return (
-        <View style={StyleSheet.absoluteFill} className="relative">
-            <CameraView
-                onBarcodeScanned={scanned ? undefined : handleScanResult}
-                barcodeScannerSettings={{
-                    barcodeTypes: ["qr"],
-                }}
-                style={StyleSheet.absoluteFill}
-                enableTorch={torch}
-                zoom={0.2}
-            />
+        <SafeAreaView className="flex-1 bg-white">
+            <View className="flex-1">
+                <View style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 1000 }}>
+                    <CustomHeaderLoggedIn />
+                </View>
 
-            {/* Overlay */}
-            <View className="absolute inset-0 justify-center items-center">
-                {/* Scanning box */}
-                <View className="w-80 h-80 border-4 border-white rounded-xl"/>
-            </View>
+                <View className="px-6 mt-24">
+                    <Text style={{ fontFamily: 'Lexend-Zetta-Bold' }}>Scan QR Code</Text>
+                    <Text className="mt-1" style={{ color: colors.secondary, fontFamily: 'Lexend-Deca-Medium' }}>
+                        Add a new Loyalty Program
+                    </Text>
+                </View>
 
-            <View className="absolute mb-7 bottom-10 left-6 right-6 flex-row justify-between items-center">
-                <View>
-                    {scanned && (
+                {/* Camera View */}
+                <CameraView
+                    onBarcodeScanned={scanned ? undefined : handleScanResult}
+                    barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
+                    style={[StyleSheet.absoluteFill, { top: 160 }]} // Only Camera fills full area starting lower
+                    enableTorch={torch}
+                    zoom={0.1}
+                />
+
+                {/* QR Scan Box */}
+                <View className="absolute inset-0" style={{ top: 70 }}>
+                    <View className="absolute inset-0 justify-center items-center">
+                        <View
+                            style={{
+                                width: 320,
+                                height: 320,
+                                borderRadius: 20,
+                                borderWidth: 4,
+                                borderColor: "#92C4CE",
+                                backgroundColor: "transparent",
+                            }}
+                        />
+                    </View>
+                </View>
+
+                {/* Bottom Buttons */}
+                <View className="absolute bottom-32 left-6 right-6 flex-row justify-between items-center">
+                    <View>
+                        {scanned && (
+                            <TouchableOpacity
+                                onPress={() => setScanned(false)}
+                                className="bg-white p-3 rounded-full"
+                            >
+                                <Image
+                                    source={icons.qr_scanner}
+                                    style={{ width: 28, height: 28, tintColor: colors.secondary }}
+                                />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+
+                    <View>
                         <TouchableOpacity
-                            onPress={() => setScanned(false)}
+                            onPress={() => setTorch((prev) => !prev)}
                             className="bg-white p-3 rounded-full"
                         >
                             <Image
-                                source={icons.qr_scanner}
-                                style={{width: 28, height: 28, tintColor: colors.secondary}}
+                                source={icons.flashlight}
+                                style={{ width: 28, height: 28, tintColor: colors.secondary }}
                             />
                         </TouchableOpacity>
-                    )}
+                    </View>
                 </View>
 
-                <View>
-                    <TouchableOpacity
-                        onPress={() => setTorch((prev) => !prev)}
-                        className="bg-white p-3 rounded-full"
-                    >
-                        <Image
-                            source={icons.flashlight}
-                            style={{width: 28, height: 28, tintColor: colors.secondary}}
-                        />
-                    </TouchableOpacity>
-                </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 
