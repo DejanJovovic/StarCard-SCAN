@@ -15,7 +15,6 @@ import rightArrow from "@/assets/icons/right-arrow.png";
 import edit from "@/assets/icons/edit.png";
 import twoArrows from "@/assets/icons/two-arrows.png";
 import checkMark from "@/assets/icons/check-mark.png";
-import avatar from "../assets/images/avatar.png";
 import starIcon from "../assets/icons/star-icon.png";
 import eyeOpen from "../assets/icons/eye-open.png";
 import eyeClosed from "../assets/icons/eye-closed.png";
@@ -25,6 +24,10 @@ import wallet_new from "../assets/icons/wallet_new.png";
 import qr_scanner from "../assets/icons/qr-scanner.png";
 import flashlight from "../assets/icons/flashlight.png";
 import favicon from "../assets/icons/favicon.png";
+import menuIconNew from "../assets/icons/menu_icon_new.png";
+import homeButton from "../assets/icons/home_button.png";
+import plus_icon from "../assets/icons/plus_icon.png";
+import x_icon from "../assets/icons/x_icon_new.png";
 
 export default {
     google,
@@ -44,7 +47,6 @@ export default {
     edit,
     twoArrows,
     checkMark,
-    avatar,
     starIcon,
     eyeOpen,
     eyeClosed,
@@ -53,5 +55,9 @@ export default {
     wallet_new,
     qr_scanner,
     flashlight,
-    favicon
+    favicon,
+    menuIconNew,
+    homeButton,
+    plus_icon,
+    x_icon
 };
