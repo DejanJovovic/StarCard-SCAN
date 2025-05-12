@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.deks123.StarCardApp",
+      "bundleIdentifier": "com.deks123.StarCardScan",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to scan QR codes."
@@ -53,7 +53,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "d7f5cbc7-9ccf-40d2-acd3-e32a7741b300"
+        "projectId": "da255b0b-0d2f-43b1-90c7-2aeba164b232"
       }
     }
   }
