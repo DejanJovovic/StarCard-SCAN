@@ -4,7 +4,8 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
-    ImageSourcePropType, StatusBar
+    ImageSourcePropType, StatusBar,
+    Platform
 } from 'react-native'
 import React from 'react'
 import {LinearGradient} from "expo-linear-gradient";
@@ -43,7 +44,8 @@ const SettingsItem = ({
 
 const Settings = () => {
     return (
-        <SafeAreaView className="h-full">
+        // on ios it shows full white screen, this should solve the issue???
+        <SafeAreaView className="h-full" style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 50 : 0 }}>
             <LinearGradient colors={[colors.gradientColor1, colors.gradientColor2]} className="flex-1">
                 <View style={{position: "absolute", top: 0, left: 0, right: 0, zIndex: 1000}}>
                     <CustomHeaderLoggedIn/>
