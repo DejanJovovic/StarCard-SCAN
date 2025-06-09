@@ -2,7 +2,6 @@ import google from "@/assets/icons/google.png";
 import search from "@/assets/icons/search.png";
 import person from "@/assets/icons/person.png";
 import bell from "@/assets/icons/bell.png";
-import heart from "@/assets/icons/heart.png";
 import backArrow from "@/assets/icons/back-arrow.png";
 import card from "@/assets/icons/card.png";
 import info from "@/assets/icons/info.png";
@@ -28,13 +27,31 @@ import menuIconNew from "../assets/icons/menu_icon_new.png";
 import homeButton from "../assets/icons/home_button.png";
 import plus_icon from "../assets/icons/plus_icon.png";
 import x_icon from "../assets/icons/x_icon_new.png";
+import settingsButton from "../assets/icons/settings_button.png";
+import checkedTerms from "../assets/icons/checkedTerms.png";
+import checkForTerms from "../assets/icons/checkForTerms.png";
+import datePicker from "../assets/icons/datePicker.png";
+import homeMenuButton from "../assets/icons/homeMenuButton.png";
+import scanMenuButton from "../assets/icons/scanMenuButton.png";
+import searchMenuButton from "../assets/icons/searchMenuButton.png";
+import profileMenuButton from "../assets/icons/profileMenuButton.png";
+import walletMenuButton from "../assets/icons/walletMenuButton.png";
+import homeMenuButtonHover from "../assets/icons/homeMenuButtonHover.png";
+import scanMenuButtonHover from "../assets/icons/scanMenuButtonHover.png";
+import searchMenuButtonHover from "../assets/icons/searchMenuButtonHover.png";
+import profileMenuButtonHover from "../assets/icons/profileMenuButtonHover.png";
+import walletMenuButtonHover from "../assets/icons/walletMenuButtonHover.png";
+import homeMenuButtonActive from "../assets/icons/homeMenuButtonActive.png";
+import scanMenuButtonActive from "../assets/icons/scanMenuButtonActive.png";
+import searchMenuButtonActive from "../assets/icons/searchMenuButtonActive.png";
+import profileMenuButtonActive from "../assets/icons/profileMenuButtonActive.png";
+import walletMenuButtonActive from "../assets/icons/walletMenuButtonActive.png";
 
 export default {
     google,
     search,
     person,
     bell,
-    heart,
     backArrow,
     card,
     info,
@@ -59,5 +76,24 @@ export default {
     menuIconNew,
     homeButton,
     plus_icon,
-    x_icon
+    x_icon,
+    settingsButton,
+    checkForTerms,
+    checkedTerms,
+    datePicker,
+    homeMenuButton,
+    scanMenuButton,
+    searchMenuButton,
+    profileMenuButton,
+    walletMenuButton,
+    homeMenuButtonHover,
+    scanMenuButtonHover,
+    searchMenuButtonHover,
+    profileMenuButtonHover,
+    walletMenuButtonHover,
+    homeMenuButtonActive,
+    scanMenuButtonActive,
+    searchMenuButtonActive,
+    profileMenuButtonActive,
+    walletMenuButtonActive
 };
