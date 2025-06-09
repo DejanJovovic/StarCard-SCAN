@@ -4,14 +4,14 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
-    ImageSourcePropType, StatusBar,
-    Platform
+    ImageSourcePropType, Platform
 } from 'react-native'
 import React from 'react'
 import {LinearGradient} from "expo-linear-gradient";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from "@/constants/colors";
 import icons from "@/constants/icons";
+
 import CustomHeaderLoggedIn from "@/components/CustomHeaderLoggedIn";
 
 interface SettingsItemProp {
@@ -74,4 +74,3 @@ const Settings = () => {
     )
 }
 export default Settings
-

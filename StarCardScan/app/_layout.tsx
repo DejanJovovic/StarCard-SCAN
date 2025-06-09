@@ -22,6 +22,7 @@ export default function RootLayout() {
         'Lexend-Zetta-Medium': require('../assets/fonts/LexendZetta-Medium.ttf'),
         'Lexend-Zetta-Light': require('../assets/fonts/LexendZetta-Light.ttf'),
         'Lexend-Deca-SemiBold': require('../assets/fonts/LexendDeca-SemiBold.ttf'),
+        'Lexend-Deca-Bold': require('../assets/fonts/LexendDeca-Bold.ttf'),
         'Lexend-Deca-Light': require('../assets/fonts/LexendDeca-Light.ttf'),
         'Lexend-Deca-Medium': require('../assets/fonts/LexendDeca-Medium.ttf'),
     });
